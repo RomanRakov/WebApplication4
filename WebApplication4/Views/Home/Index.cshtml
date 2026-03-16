@@ -1,0 +1,108 @@
+﻿<h1 class="text-center mb-4">
+    Московский дом недвижимости
+</h1>
+
+<p>
+    Пользователь:
+    @Context.Session.GetString("UserName")
+</p>
+
+<div class="row">
+
+
+    <div class="col-md-4">
+
+        <div class="card">
+
+            <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae"
+                 class="card-img-top">
+
+            <div class="card-body">
+
+                <h5>2-комнатная</h5>
+
+                <p>Москва</p>
+
+                <p>5 000 000 ₽</p>
+
+                <a class="btn btn-primary"
+                       asp-controller="Flat"
+                       asp-action="Details"
+                       asp-route-id="1">
+
+                    Подробнее
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-4">
+
+        <div class="card">
+
+            <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb"
+                 class="card-img-top">
+
+            <div class="card-body">
+
+                <h5>3-комнатная</h5>
+
+                <p>Москва</p>
+
+                <p>8 000 000 ₽</p>
+
+                <a class="btn btn-primary"
+                       asp-controller="Flat"
+                       asp-action="Details"
+                       asp-route-id="2">
+
+                    Подробнее
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="col-md-4">
+
+        <div class="card">
+
+            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"
+                 class="card-img-top">
+
+            <div class="card-body">
+
+                <h5>1-комнатная</h5>
+
+                <p>Москва</p>
+
+                <p>3 000 000 ₽</p>
+
+                <a class="btn btn-primary"
+                       asp-controller="Flat"
+                       asp-action="Details"
+                       asp-route-id="3">
+
+                    Подробнее
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
