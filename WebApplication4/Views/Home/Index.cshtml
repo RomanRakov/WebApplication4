@@ -1,108 +1,378 @@
-﻿<h1 class="text-center mb-4">
-    Московский дом недвижимости
-</h1>
-
-<p>
-    Пользователь:
-    @Context.Session.GetString("UserName")
-</p>
-
-<div class="row">
+﻿@{
+    ViewData["Title"] = "Главная";
+}
 
 
-    <div class="col-md-4">
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+              
+                <div class="rating-badge mb-4">
+                    <div class="stars">★★★★★</div>
+                    <div class="rating-text">Все отзывы на 5 звезд</div>
+                </div>
 
-        <div class="card">
+               
+                <h1 class="hero-title mb-3">
+                    Выкупим вашу квартиру в Москве и МО с любыми обременениями и в любом состоянии за 1 день
+                </h1>
 
-            <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae"
-                 class="card-img-top">
+               
+                <p class="hero-subtitle mb-4">
+                    Выплатим на руки до 95% рыночной стоимости безопасным и удобным для Вас способом
+                </p>
 
-            <div class="card-body">
+            
+                <div class="d-flex flex-wrap gap-3 mb-3">
+                    <button class="btn btn-primary btn-lg rounded-pill px-5">
+                        Узнать цену выкупа
+                    </button>
+                </div>
 
-                <h5>2-комнатная</h5>
-
-                <p>Москва</p>
-
-                <p>5 000 000 ₽</p>
-
-                <a class="btn btn-primary"
-                       asp-controller="Flat"
-                       asp-action="Details"
-                       asp-route-id="1">
-
-                    Подробнее
-
-                </a>
-
+               
+                <p class="hero-note">Предложим цену выше, чем другие</p>
             </div>
 
+            <div class="col-lg-5">
+              
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="info-card-icon">↑</div>
+                        <div class="info-card-percent">95%</div>
+                        <div class="info-card-text">Выплатим до 95% стоимости и закроем все обременения</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Преимущества -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+           
+            <div class="col-md-3 mb-4">
+                <div class="feature-card text-center p-4">
+                    <div class="feature-icon mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" viewBox="0 0 16 16">
+                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                            <path d="M11 7a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm6 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                        </svg>
+                    </div>
+                    <h5 class="feature-title">Покупаем за 1 день</h5>
+                    <p class="feature-text">Встречаемся в день обращения, осматриваем квартиру и документы, согласовываем стоимость и выдаем аванс до 2 млн. руб. на месте</p>
+                </div>
+            </div>
+
+           
+            <div class="col-md-3 mb-4">
+                <div class="feature-card text-center p-4">
+                    <div class="feature-icon mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" viewBox="0 0 16 16">
+                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 1 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+                        </svg>
+                    </div>
+                    <h5 class="feature-title">Погашаем долги и снимаем обременения</h5>
+                    <p class="feature-text">Возьмем на себя все проблемы с долгами по коммунальным платежам, ипотеке, с залогами и под судебным арестом</p>
+                </div>
+            </div>
+
+        
+            <div class="col-md-3 mb-4">
+                <div class="feature-card text-center p-4">
+                    <div class="feature-icon mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" viewBox="0 0 16 16">
+                            <path d="M5.337 11.718a.703.703 0 0 1-.597-.185l-1.9-1.9a.703.703 0 0 1 .994-.994l1.406 1.406a.703.703 0 0 1-.185.597l-.718.718zm5.326 0a.703.703 0 0 0 .597-.185l1.9-1.9a.703.703 0 0 0-.994-.994l-1.406 1.406a.703.703 0 0 0 .185.597l.718.718zM8 2a6 6 0 1 0 0 12A6 6 0 0 0 8 2zm0 11a5 5 0 1 1 0-10 5 5 0 0 1 0 10z" />
+                        </svg>
+                    </div>
+                    <h5 class="feature-title">Безопасная сделка</h5>
+                    <p class="feature-text">Оформление всех документов и договора купли-продажи через нотариуса</p>
+                </div>
+            </div>
+
+          
+            <div class="col-md-3 mb-4">
+                <div class="feature-card text-center p-4">
+                    <div class="feature-icon mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" viewBox="0 0 16 16">
+                            <path d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1z" />
+                            <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2zm13 2v5H1V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm-1 9H2a1 1 0 0 1-1-1v-1h14v1a1 1 0 0 1-1 1z" />
+                        </svg>
+                    </div>
+                    <h5 class="feature-title">Удобное получение денежных средств</h5>
+                    <p class="feature-text">Перевод на карту, банковский счет или наличными</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Сложные ситуации -->
+<section class="py-5">
+    <div class="container">
+
+        <div class="row mb-4">
+            <div class="col-lg-6 mb-4">
+                <div class="situation-card situation-card-highlighted h-100">
+                    <div class="p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <h2 class="section-title text-white mb-4">
+                                Вы можете обратиться к нам<br>в самых сложных ситуациях
+                            </h2>
+
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div>
+                                    <div class="stats-label">Процент</div>
+                                    <div class="stats-label">успешных сделок</div>
+                                </div>
+                                <div class="stats-percent">99%</div>
+                            </div>
+                            <div class="dots-container mb-4">
+                                @for (int i = 0; i < 50; i++)
+                                {
+                                    <div class="dot @(i < 49 ? "dot-filled" : "dot-empty")"></div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+                <div class="situation-card h-100 p-4">
+                    <div class="position-relative h-100">
+                        <div class="card-number">1</div>
+                        <h5 class="situation-title">Недвижимость в ипотеке, и у вас нет возможности ее платить</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+                <div class="situation-card h-100 p-4">
+                    <div class="position-relative h-100">
+                        <div class="card-number">2</div>
+                        <h5 class="situation-title">Требуется срочная продажа недвижимости с долгами за ЖКХ, которые вы не хотите закрывать</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="situation-card h-100 p-4 d-flex flex-column">
+                    <div class="position-relative flex-grow-1">
+                        <div class="card-number card-number-light">3</div>
+                        <h5 class="situation-title mb-0">Вам необходимо быстро продать старую квартиру, чтобы купить новую</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="situation-card h-100 p-4 d-flex flex-column">
+                    <div class="position-relative flex-grow-1">
+                        <div class="card-number card-number-light">4</div>
+                        <h5 class="situation-title mb-0">Совладельцы недвижимости против продажи или недоступны</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="situation-card h-100 p-4 d-flex flex-column">
+                    <div class="position-relative flex-grow-1">
+                        <div class="card-number card-number-light">5</div>
+                        <h5 class="situation-title mb-0">Нужны деньги для бизнеса, обучения, лечения или на другие нужды</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="situation-card h-100 p-4 d-flex flex-column">
+                    <div class="position-relative flex-grow-1">
+                        <div class="card-number card-number-light">6</div>
+                        <h5 class="situation-title mb-0">Недвижимость находится под арестом за долги, но ее необходимо продать</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--  Оценка стоимости -->
+<section class="py-5 bg-light">
+    <div class="container mt-5 pt-4">
+        <div class="row">
+            <div class="col-lg-8 text-start">
+                <h2 class="mb-3">Ответьте на несколько вопросов,<br>чтобы получить предварительную стоимость выкупа</h2>
+                <p class="valuation-text text-muted mb-0">
+                    Делаем реальную рыночную оценку и не занижаем стоимость
+                </p>
+            </div>
         </div>
 
     </div>
+</section>
 
+<!-- Опрос -->
+<section class="py-5 mt-5 bg-transparent">
+    <div class="container">
+        
+        <div class="quiz-wrapper">
+            
+            <div class="quiz-sidebar d-flex flex-column justify-content-between">
+                
+                <div class="sidebar-promo p-4 mb-4">
+                    <h5 class="fw-bold mb-2 lh-sm">
+                        Предложим больше денег,<br> чем другие!
+                    </h5>
+                    <p class="small mb-2 lh-base text-muted">
+                        Ответьте на 6 вопросов
+                    </p>
+                    <p class="mb-0 small fw-semibold text-dark">
+                        - мы дадим лучшее предложение по цене и 2 миллиона рублей аванса уже сегодня
+                    </p>
+                </div>
 
-
-    <div class="col-md-4">
-
-        <div class="card">
-
-            <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb"
-                 class="card-img-top">
-
-            <div class="card-body">
-
-                <h5>3-комнатная</h5>
-
-                <p>Москва</p>
-
-                <p>8 000 000 ₽</p>
-
-                <a class="btn btn-primary"
-                       asp-controller="Flat"
-                       asp-action="Details"
-                       asp-route-id="2">
-
-                    Подробнее
-
-                </a>
-
+                <div class="sidebar-contact fs-6 text-dark text-center mt-auto pt-3 pb-2">
+                    Если у вас есть вопросы,<br>напишите нам в 
+                    <a href="#" class="link-underline-light link-underline-opacity-0 link-primary text-decoration-none">Telegram</a>
+                </div>
             </div>
 
+            <div class="quiz-form-content ms-lg-4 position-relative">
+                <div class="progress-bar-top mb-4">
+                    <div class="progress-bar-current" style="width: 14%;"></div> 
+                </div>
+
+                <h2 class="question-title mb-5">Что хотите продать?</h2>
+
+                <div class="options-grid row g-3 mb-5">
+                    <div class="col-6 col-md-6">
+                        <label class="option-card w-100 h-100 d-flex align-items-center p-3 border rounded-pill cursor-pointer">
+                            <input type="radio" name="prop_type" class="btn-check visually-hidden" checked>
+                            <span class="form-check-label fw-medium">Квартира</span>
+                        </label>
+                    </div>
+
+                    <div class="col-6 col-md-6">
+                        <label class="option-card w-100 h-100 d-flex align-items-center p-3 border rounded-pill cursor-pointer">
+                            <input type="radio" name="prop_type" class="btn-check visually-hidden">
+                            <span class="form-check-label fw-medium">Апартаменты</span>
+                        </label>
+                    </div>
+
+                    <div class="col-6 col-md-6">
+                        <label class="option-card w-100 h-100 d-flex align-items-center p-3 border rounded-pill cursor-pointer">
+                            <input type="radio" name="prop_type" class="btn-check visually-hidden">
+                            <span class="form-check-label fw-medium">Комната</span>
+                        </label>
+                    </div>
+
+                    <div class="col-6 col-md-6">
+                        <label class="option-card w-100 h-100 d-flex align-items-center p-3 border rounded-pill cursor-pointer">
+                            <input type="radio" name="prop_type" class="btn-check visually-hidden">
+                            <span class="form-check-label fw-medium">Доля в квартире</span>
+                        </label>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <label class="option-card w-100 h-100 d-flex align-items-center p-3 border rounded-pill cursor-pointer">
+                            <input type="radio" name="prop_type" class="btn-check visually-hidden">
+                            <span class="form-check-label fw-medium">Другое</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="footer-nav d-flex justify-content-between align-items-center">
+                    <span class="step-indicator text-secondary"><small>Шаг: 1/7</small></span>
+                    
+                    <div class="nav-buttons d-flex gap-2">
+                        <button class="btn btn-light border px-4 py-2 rounded-circle" disabled>←</button>
+                        <button class="btn btn-primary px-4 py-2 rounded-pill fw-bold">Далее →</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
+</section>
 
 
+<!-- Часто задаваемые вопросы -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <h2 class="faq-title">
+            Ответы на часто<br>
+            задаваемые вопросы
+        </h2>
 
-    <div class="col-md-4">
-
-        <div class="card">
-
-            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"
-                 class="card-img-top">
-
-            <div class="card-body">
-
-                <h5>1-комнатная</h5>
-
-                <p>Москва</p>
-
-                <p>3 000 000 ₽</p>
-
-                <a class="btn btn-primary"
-                       asp-controller="Flat"
-                       asp-action="Details"
-                       asp-route-id="3">
-
-                    Подробнее
-
-                </a>
-
+        <div class="faq-list">
+            <div class="faq-item mb-4">
+                <h4 class="fw-bold">Как быстро я получу деньги?</h4>
+                <p class="text-muted mt-2 lh-base">Аванс за выкупаемую комнату Вы можете получить уже в день обращения. Всю сумму Вы можете получить ориентировочно в течение 7–10 дней с момента обращения.</p>
+                <hr class="my-4 opacity-25">
             </div>
 
+            <div class="faq-item mb-4">
+                <h4 class="fw-bold">Какие гарантии, что я получу деньги?</h4>
+                <p class="text-muted mt-2 lh-base">Мы готовы рассчитаться с Вами по любой удобной и безопасной для Вас схеме: через банковский сейф, аккредитив или депозит нотариуса. При любой схеме организации сделки денежные средства за выкупаемую квартиру будут заложены на Ваше имя ещё до подписания договора купли-продажи.</p>
+                <hr class="my-4 opacity-25">
+            </div>
+
+            <div class="faq-item mb-4">
+                <h4 class="fw-bold">У меня наложен арест на квартиру (долги по коммунальным платежам, иные обязательства). Что делать?</h4>
+                <p class="text-muted mt-2 lh-base">Мы выкупаем квартиры из-под ипотеки, погасим Ваши долги и поможем снять арест на квартиру или комнату.</p>
+                <hr class="my-4 opacity-25">
+            </div>
+
+            <div class="faq-item mb-4">
+                <h4 class="fw-bold">В чём выгода продать квартиру через агентство срочного выкупа?</h4>
+                <p class="text-muted mt-2 lh-base">Выход на сделку за 1 день. Продажа квартиры - достаточно длительный процесс. Продать квартиру без помощи специалистов очень сложно, так как приходится выполнять частые показы даже самой маленькой квартирки, далеко не все располагают средствами, чтобы приобрести квартиру без ипотеки, что серьезно увеличивает сроки проведения сделки. Поэтому, найти покупателя и продать квартиру быстро и самостоятельно очень долго. Наша компания имеет собственные средства, за которые и приобретает квартиры в любой ситуации. Вы сразу получаете деньги за жилье, а поиск новых владельцев уже ложится на нас.</p>
+            </div>
+
+            <div class="faq-item mb-4">
+                <h4 class="fw-bold">Могу ли я продать квартиру, если к ней нет доступа и/или я нахожусь в другом городе?</h4>
+                <p class="text-muted mt-2 lh-base">Да, наши специалисты могут оказать помощь в удаленном проведении сделки, а также переводе суммы выкупа, и не важно находитесь вы на территории России или нет.</p>
+            </div>
         </div>
-
     </div>
+</section>
+
+<!-- Узнать стоимость выкупа -->
+<section class="final-footer-section mt-5">
+
+    <div class="footer-hero bg-primary p-4 p-md-5 text-white position-relative overflow-hidden">
+        <div class="container position-relative z-index-2">
+
+            <div class="row">
+
+                <div class="col-12 col-md-8 col-lg-7 mb-5 mb-lg-0 text-start">
+
+                    <h2 class="mb-3 display-5 fw-bold lh-1">Узнайте за какую сумму<br>мы можем выкупить вашу квартиру</h2>
+
+                    <p class="lead mb-4 opacity-75">
+                        Оставьте свои данные, мы перезвоним, скажем предварительную стоимость и вы сможете уточнить любую информацию по срочной продаже недвижимости
+                    </p>
+                    <form class="d-flex flex-column flex-md-row gap-2 align-items-center w-100">
+
+                        <div class="footer-input-container flex-grow-1 mx-auto w-100 w-md-auto me-md-2">
+                            <input type="text" class="footer-input-field" placeholder="Ваше имя">
+                        </div>
+
+                        <div class="footer-input-container flex-grow-1 mx-auto w-100 w-md-auto me-md-2">
+                            <input type="tel" class="footer-input-field" placeholder="Номер телефона">
+                        </div>
+
+                        <button type="submit" class="btn btn-light px-5 py-2 shadow footer-btn">
+                            Узнать стоимость
+                        </button>
+                    </form>
 
 
-</div>
+            </div>
+        </div>
+    </div>
+</section>
