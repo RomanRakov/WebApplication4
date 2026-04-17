@@ -12,5 +12,11 @@ namespace WebApplication4.Data
         }
 
         public DbSet<Flat> Flats { get; set; }
+        public DbSet<Suggestion> Suggestions { get; set; } 
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
     }
 }

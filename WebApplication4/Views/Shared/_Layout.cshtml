@@ -41,9 +41,17 @@
                 <li class="nav-item">
                     <a class="nav-link active rounded-pill px-4" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link rounded-pill px-4" asp-area="" asp-controller="Home" asp-action="Advantages">Объявления</a>
-                </li>
+                    <li class="nav-item">
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <a class="nav-link rounded-pill px-4" asp-controller="Announcements" asp-action="Index">Объявления</a>
+                        }
+                        else
+                        {
+                            <!-- Если НЕ залогинен - показывает кнопку Войти -->
+                            <a class="nav-link rounded-pill px-4 text-secondary" href="/Account/Login">Войти</a>
+                        }
+                    </li>
                 <li class="nav-item">
                     <a class="nav-link rounded-pill px-4" asp-area="" asp-controller="Home" asp-action="FAQ">Вопрос-ответ</a>
                 </li>
