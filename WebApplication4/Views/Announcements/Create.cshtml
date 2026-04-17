@@ -1,0 +1,60 @@
+﻿@model WebApplication4.Models.Suggestion
+@{
+    ViewData["Title"] = "Предложить квартиру";
+}
+
+<div class="container py-5">
+    <h2 class="mb-4 text-center">🏠 Добавить предложение о продаже</h2>
+
+    <form asp-action="Create" method="post" class="bg-light p-4 rounded shadow-sm">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="Title" class="form-label fw-bold"></label>
+                <input asp-for="Title" class="form-control" placeholder="Название квартиры" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="PropertyType" class="form-label fw-bold"></label>
+                <select asp-for="PropertyType" class="form-select">
+                    <option value="Квартира">Квартира</option>
+                    <option value="Комната">Комната</option>
+                    <option value="Апартаменты">Апартаменты</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label asp-for="Area" class="form-label fw-bold"></label>
+                <input asp-for="Area" type="number" class="form-control" placeholder="м²" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label asp-for="Rooms" class="form-label fw-bold"></label>
+                <select asp-for="Rooms" class="form-select">
+                    <option value="1">1 комната</option>
+                    <option value="2">2 комнаты</option>
+                    <option value="3">3 комнаты</option>
+                </select>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label asp-for="Price" class="form-label fw-bold"></label>
+                <input asp-for="Price" type="number" class="form-control" placeholder="Цена (₽)" />
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Address" class="form-label fw-bold"></label>
+            <input asp-for="Address" class="form-control" placeholder="Адрес" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label fw-bold"></label>
+            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Отмена</a>
+            <button type="submit" class="btn btn-primary">Отправить на модерацию</button>
+        </div>
+    </form>
+</div>

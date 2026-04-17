@@ -1,0 +1,29 @@
+﻿@model List<WebApplication4.Models.Suggestion>
+@{
+    ViewData["Title"] = "Модерация";
+}
+
+<div class="container py-5">
+    <h2 class="mb-4 text-center">Панель администратора</h2>
+
+    @foreach (var item in Model)
+    {
+        <div class="card mb-3 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">@item.Title</h5>
+                <p class="card-text"><strong>@item.Price ₽</strong> | @item.Address</p>
+                <span class="badge bg-warning">@item.Status</span>
+
+                @if (item.Status == WebApplication4.Models.SuggestionStatus.Pending)
+                {
+                    <form asp-action="Approve" method="post" style="display:inline;">
+                        <button type="submit" name="id" value="@item.Id" class="btn btn-sm btn-success">Одобрить</button>
+                    </form>
+                    <form asp-action="Reject" method="post" style="display:inline;">
+                        <button type="submit" name="id" value="@item.Id" class="btn btn-sm btn-danger">Отклонить</button>
+                    </form>
+                }
+            </div>
+        </div>
+    }
+</div>

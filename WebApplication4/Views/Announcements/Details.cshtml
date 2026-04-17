@@ -1,0 +1,34 @@
+﻿@model WebApplication4.Models.Suggestion
+@{
+    ViewData["Title"] = "Подробная информация";
+}
+
+<div class="container py-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white">
+            <h3>@Model.Title</h3>
+        </div>
+        <div class="card-body">
+            <p><strong>💰 Цена:</strong> @Model.Price ₽</p>
+            <p><strong>📐 Площадь:</strong> @Model.Area м²</p>
+            <p><strong>🚪 Комнат:</strong> @Model.Rooms</p>
+            <p><strong>📍 Адрес:</strong> @Model.Address</p>
+            <hr>
+            <p class="fst-italic">@Model.Description</p>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="mt-4">
+                    <form asp-action="Approve" method="post" style="display:inline;">
+                        <button type="submit" name="id" value="@Model.Id" class="btn btn-success">✅ Одобрить</button>
+                    </form>
+                    <form asp-action="Reject" method="post" style="display:inline;">
+                        <button type="submit" name="id" value="@Model.Id" class="btn btn-danger">❌ Отклонить</button>
+                    </form>
+                </div>
+            }
+
+            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary mt-3">← Назад</a>
+        </div>
+    </div>
+</div>
