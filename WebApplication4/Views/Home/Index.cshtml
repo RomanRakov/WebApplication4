@@ -24,11 +24,9 @@
                 </p>
 
             
-                <div class="d-flex flex-wrap gap-3 mb-3">
-                    <button class="btn btn-primary btn-lg rounded-pill px-5">
-                        Узнать цену выкупа
-                    </button>
-                </div>
+                <a href="#test" class="btn btn-primary btn-lg rounded-pill px-5">
+                    Узнать цену выкупа
+                </a>
 
                
                 <p class="hero-note">Предложим цену выше, чем другие</p>
@@ -217,7 +215,7 @@
 </section>
 
 <!-- Опрос -->
-<section class="py-5 mt-5 bg-transparent">
+<section id ="test" class="py-5 mt-5 bg-transparent">
     <div class="container">
         
         <div class="quiz-wrapper">
@@ -374,7 +372,7 @@
 
 
 <!-- Часто задаваемые вопросы -->
-<section class="py-5 bg-white">
+<section id="questions" class="py-5 bg-white">
     <div class="container">
         <h2 class="faq-title">
             Ответы на часто<br>
@@ -428,20 +426,62 @@
                     <p class="lead mb-4 opacity-75">
                         Оставьте свои данные, мы перезвоним, скажем предварительную стоимость и вы сможете уточнить любую информацию по срочной продаже недвижимости
                     </p>
-                    <form class="d-flex flex-column flex-md-row gap-2 align-items-center w-100">
-
+                    <form id="leadForm" class="d-flex flex-column flex-md-row gap-2 align-items-center w-100">
                         <div class="footer-input-container flex-grow-1 mx-auto w-100 w-md-auto me-md-2">
-                            <input type="text" class="footer-input-field" placeholder="Ваше имя">
+                            <input type="text" id="userName" name="name" class="footer-input-field" placeholder="Ваше имя" required>
                         </div>
 
                         <div class="footer-input-container flex-grow-1 mx-auto w-100 w-md-auto me-md-2">
-                            <input type="tel" class="footer-input-field" placeholder="Номер телефона">
+                            <input type="tel" id="userPhone" name="phone" class="footer-input-field" placeholder="Номер телефона" required>
                         </div>
 
-                        <button type="submit" class="btn btn-light px-5 py-2 shadow footer-btn">
-                            Узнать стоимость
+                        <button type="submit" id="submitBtn" class="btn btn-light px-5 py-2 shadow footer-btn">
+                            Узнать цену
                         </button>
                     </form>
+
+                    <div id="responseMessage" class="mt-3 fw-bold text-white" style="display:none; font-size: 1.2rem;"></div>
+
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                        const form = document.getElementById('leadForm');
+        
+                        form.addEventListener('submit', function (e) {
+                        e.preventDefault();
+            
+                        const nameValue = document.getElementById('userName').value;
+                        const phoneValue = document.getElementById('userPhone').value;
+                        const msgDiv = document.getElementById('responseMessage');
+
+                        // Отправка данных на сервер (в HomeController)
+                        fetch('/Home/ProcessLead', {
+                        method: 'POST',
+                        headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: new URLSearchParams({
+                        'name': nameValue,
+                        'phone': phoneValue
+                        })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                        if (data.success) {
+                        form.style.display = 'none'; // Прячем форму
+                        msgDiv.textContent = data.message;
+                        msgDiv.style.display = 'block'; // Показываем спасибо
+                        } else {
+                        alert(data.message); // Показываем ошибку валидации
+                        }
+                        })
+                        .catch(error => {
+                        console.error('Error:', error);
+                        alert("Ошибка при отправке. Проверьте консоль.");
+                        });
+                        });
+                        });
+                    </script>
 
 
             </div>
