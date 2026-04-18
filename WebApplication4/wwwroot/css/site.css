@@ -571,3 +571,31 @@ body {
         max-width: 100%;
     }
 }
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Отступы для карусели, чтобы поместились стрелки и точки */
+#reviewsCarousel {
+    padding: 0 20px;
+}
+
+/* Настройка цвета и формы индикаторов */
+.carousel-indicators [data-bs-target] {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+/* Увеличиваем отступ секции, так как точки вынесены вниз */
+#reviews {
+    padding-bottom: 80px !important;
+}
+
+/* Адаптивность: на мобильных скрываем стрелки по бокам, если они выходят за экран */
+@media (max-width: 768px) {
+    .carousel-control-prev, .carousel-control-next {
+        display: none;
+    }
+}
