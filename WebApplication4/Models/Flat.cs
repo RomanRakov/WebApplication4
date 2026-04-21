@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApplication4.Models
 {
@@ -6,51 +7,19 @@ namespace WebApplication4.Models
     {
         public int Id { get; set; }
 
-        [Required]
-        [MaxLength(100)]
-        public string Title { get; set; } = null!; 
+        public ObjectType ObjectType { get; set; }
+        public double Area { get; set; }
+        public RoomsCount Rooms { get; set; }
+        public EncumbranceType Encumbrance { get; set; }
+        public ConditionType Condition { get; set; }
+        public string Address { get; set; } = string.Empty;
+        public string PhoneNumber { get; set; } = string.Empty;
+        public decimal? Price { get; set; }
+        public string? Description { get; set; }
+        public string? ImageUrl { get; set; }
 
-        [Required]
-        [Display(Name = "Тип недвижимости")]
-        public string PropertyType { get; set; } = null!; 
-
-        [Required]
-        [Range(10, 1000)]
-        [Display(Name = "Площадь (м²)")]
-        public decimal Area { get; set; } 
-
-        [Required]
-        [Display(Name = "Количество комнат")]
-        public int Rooms { get; set; } 
-
-        [Required]
-        [Display(Name = "Цена")]
-        public decimal Price { get; set; } 
-
-        [Required]
-        [Display(Name = "Адрес")]
-        [MaxLength(200)]
-        public string Address { get; set; } = null!;
-
-        [Display(Name = "Состояние")]
-        public string Condition { get; set; } = null!; 
-
-        [Display(Name = "Описание")]
-        [MaxLength(2000)]
-        public string Description { get; set; } = null!; 
-
-        [Required]
-        [Display(Name = "Фотография")]
-        [MaxLength(500)]
-        public string ImageUrl { get; set; } = null!; 
-
-        [Display(Name = "Дата публикации")]
-        public DateTime PublishedAt { get; set; } = DateTime.UtcNow; 
-
-        [Display(Name = "Статус")]
-        public bool IsPublished { get; set; } = false; 
-
-        [Display(Name = "Администратор")]
-        public string? ModeratorUserId { get; set; } 
+        public DateTime PublishedAt { get; set; }
+        public bool IsPublished { get; set; }
+        public string? ModeratorUserId { get; set; }
     }
 }

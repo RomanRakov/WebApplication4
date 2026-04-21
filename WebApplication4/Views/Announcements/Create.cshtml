@@ -1,60 +1,88 @@
 ﻿@model WebApplication4.Models.Suggestion
 @{
-    ViewData["Title"] = "Предложить квартиру";
+    ViewData["Title"] = "Предложить недвижимость";
 }
 
 <div class="container py-5">
     <h2 class="mb-4 text-center">🏠 Добавить предложение о продаже</h2>
 
     <form asp-action="Create" method="post" class="bg-light p-4 rounded shadow-sm">
+        @Html.AntiForgeryToken()
+
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label asp-for="Title" class="form-label fw-bold"></label>
-                <input asp-for="Title" class="form-control" placeholder="Название квартиры" />
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <label asp-for="PropertyType" class="form-label fw-bold"></label>
-                <select asp-for="PropertyType" class="form-select">
-                    <option value="Квартира">Квартира</option>
-                    <option value="Комната">Комната</option>
-                    <option value="Апартаменты">Апартаменты</option>
+                <label asp-for="ObjectType" class="form-label fw-bold"></label>
+                <select asp-for="ObjectType" class="form-select" asp-items="Html.GetEnumSelectList<ObjectType>()">
+                    <option value="">-- Выберите тип --</option>
                 </select>
+                <span asp-validation-for="ObjectType" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Area" class="form-label fw-bold"></label>
+                <input asp-for="Area" type="number" step="0.1" class="form-control" placeholder="Площадь, м²" />
+                <span asp-validation-for="Area" class="text-danger"></span>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-4 mb-3">
-                <label asp-for="Area" class="form-label fw-bold"></label>
-                <input asp-for="Area" type="number" class="form-control" placeholder="м²" />
-            </div>
-            <div class="col-md-4 mb-3">
+            <div class="col-md-6 mb-3">
                 <label asp-for="Rooms" class="form-label fw-bold"></label>
-                <select asp-for="Rooms" class="form-select">
-                    <option value="1">1 комната</option>
-                    <option value="2">2 комнаты</option>
-                    <option value="3">3 комнаты</option>
+                <select asp-for="Rooms" class="form-select" asp-items="Html.GetEnumSelectList<RoomsCount>()">
+                    <option value="">-- Количество комнат --</option>
                 </select>
+                <span asp-validation-for="Rooms" class="text-danger"></span>
             </div>
-            <div class="col-md-4 mb-3">
+            <div class="col-md-6 mb-3">
+                <label asp-for="Encumbrance" class="form-label fw-bold"></label>
+                <select asp-for="Encumbrance" class="form-select" asp-items="Html.GetEnumSelectList<EncumbranceType>()">
+                    <option value="">-- Обременения --</option>
+                </select>
+                <span asp-validation-for="Encumbrance" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="Condition" class="form-label fw-bold"></label>
+                <select asp-for="Condition" class="form-select" asp-items="Html.GetEnumSelectList<ConditionType>()">
+                    <option value="">-- Состояние --</option>
+                </select>
+                <span asp-validation-for="Condition" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
                 <label asp-for="Price" class="form-label fw-bold"></label>
-                <input asp-for="Price" type="number" class="form-control" placeholder="Цена (₽)" />
+                <input asp-for="Price" type="number" step="1" class="form-control" placeholder="Цена (руб.)" />
+                <span asp-validation-for="Price" class="text-danger"></span>
             </div>
         </div>
 
         <div class="mb-3">
             <label asp-for="Address" class="form-label fw-bold"></label>
             <input asp-for="Address" class="form-control" placeholder="Адрес" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="PhoneNumber" class="form-label fw-bold"></label>
+            <input asp-for="PhoneNumber" class="form-control" type="tel" placeholder="Номер телефона для связи" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
             <label asp-for="Description" class="form-label fw-bold"></label>
-            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+            <textarea asp-for="Description" class="form-control" rows="3" placeholder="Дополнительное описание"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
         </div>
 
         <div class="d-flex justify-content-between">
-            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Отмена</a>
+            <a asp-action="Index" class="btn btn-secondary">Отмена</a>
             <button type="submit" class="btn btn-primary">Отправить на модерацию</button>
         </div>
     </form>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
