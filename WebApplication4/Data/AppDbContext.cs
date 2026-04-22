@@ -12,7 +12,8 @@ namespace WebApplication4.Data
         }
 
         public DbSet<Flat> Flats { get; set; }
-        public DbSet<Suggestion> Suggestions { get; set; } 
+        public DbSet<Suggestion> Suggestions { get; set; }
+        public DbSet<Lead> Leads { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
