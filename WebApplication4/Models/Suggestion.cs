@@ -1,69 +1,116 @@
-﻿using System.ComponentModel.DataAnnotations;
-using WebApplication4.Models;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApplication4.Models
 {
-    // Статусы для модерации
-    public enum SuggestionStatus
+    public enum ObjectType
     {
-        Pending,   // На рассмотрении
-        Approved,  // Одобрено
-        Rejected   // Отклонено
+        [Display(Name = "Квартира")]
+        Flat,
+        [Display(Name = "Апартаменты")]
+        Apartments,
+        [Display(Name = "Комната")]
+        Room,
+        [Display(Name = "Доля в квартире")]
+        Share,
+        [Display(Name = "Другое")]
+        Other
+    }
+
+    public enum RoomsCount
+    {
+        [Display(Name = "Студия")]
+        Studio,
+        [Display(Name = "1")]
+        One,
+        [Display(Name = "2")]
+        Two,
+        [Display(Name = "3")]
+        Three,
+        [Display(Name = "4+")]
+        FourPlus
+    }
+
+    public enum EncumbranceType
+    {
+        [Display(Name = "Нет")]
+        None,
+        [Display(Name = "Ипотека")]
+        Mortgage,
+        [Display(Name = "Коммунальные долги")]
+        Utilities,
+        [Display(Name = "Другое")]
+        Other
+    }
+
+    public enum ConditionType
+    {
+        [Display(Name = "Стандартный ремонт")]
+        Standard,
+        [Display(Name = "Требуется ремонт")]
+        NeedsRepair,
+        [Display(Name = "Ремонт от застройщика")]
+        Developer,
+        [Display(Name = "Чистовая отделка")]
+        Finished,
+        [Display(Name = "Дизайнерский ремонт")]
+        Designer
     }
 
     public class Suggestion
     {
         public int Id { get; set; }
 
-        [Required]
-        [MaxLength(100)]
-        public string Title { get; set; } = null!;
+        [Required(ErrorMessage = "Выберите тип объекта")]
+        [Display(Name = "Что хотите продать?")]
+        public ObjectType ObjectType { get; set; }
 
-        [Required]
-        [Display(Name = "Тип недвижимости")]
-        public string PropertyType { get; set; } = null!;
-
-        [Required]
-        [Range(10, 1000)]
+        [Required(ErrorMessage = "Укажите площадь")]
+        [Range(1, 10000, ErrorMessage = "Площадь должна быть от 1 до 10000 м²")]
         [Display(Name = "Площадь (м²)")]
-        public decimal Area { get; set; }
+        public double Area { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Укажите количество комнат")]
         [Display(Name = "Количество комнат")]
-        public int Rooms { get; set; }
+        public RoomsCount Rooms { get; set; }
 
-        [Required]
-        [Display(Name = "Цена")]
-        public decimal Price { get; set; }
+        [Required(ErrorMessage = "Укажите наличие обременений")]
+        [Display(Name = "Обременения")]
+        public EncumbranceType Encumbrance { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Укажите состояние")]
+        [Display(Name = "Состояние квартиры")]
+        public ConditionType Condition { get; set; }
+
+        [Required(ErrorMessage = "Введите адрес")]
+        [StringLength(200)]
         [Display(Name = "Адрес")]
-        [MaxLength(200)]
-        public string Address { get; set; } = null!;
+        public string Address { get; set; } = string.Empty;
 
-        [Display(Name = "Состояние")]
-        public string Condition { get; set; } = null!;
+        [Required(ErrorMessage = "Введите номер телефона")]
+        [Phone(ErrorMessage = "Некорректный номер телефона")]
+        [Display(Name = "Номер телефона для связи")]
+        public string PhoneNumber { get; set; } = string.Empty;
 
-        [Display(Name = "Описание")]
-        [MaxLength(2000)]
-        public string Description { get; set; } = null!;
+        [Range(0, double.MaxValue, ErrorMessage = "Цена не может быть отрицательной")]
+        [Display(Name = "Цена (руб.)")]
+        public decimal? Price { get; set; }
+        public string? Description { get; set; }
 
-        [MaxLength(500)]
-        public string? ImageUrl { get; set; }
-
-        [Required]
-        public string UserId { get; set; } // Ссылка на IdentityUser
-
-        [Display(Name = "Статус")]
+        public string? UserId { get; set; }
         public SuggestionStatus Status { get; set; } = SuggestionStatus.Pending;
-
-        [Display(Name = "Дата создания")]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-        // Для админа
         public DateTime? ApprovedAt { get; set; }
-        public DateTime? RejectedAt { get; set; }
         public string? ApprovedBy { get; set; }
+        public DateTime? RejectedAt { get; set; }
         public string? RejectedBy { get; set; }
+        public string? ImageUrl { get; set; }
+    }
+
+    public enum SuggestionStatus
+    {
+        Pending,
+        Approved,
+        Rejected
     }
 }

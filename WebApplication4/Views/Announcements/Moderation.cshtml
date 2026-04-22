@@ -1,29 +1,47 @@
-﻿@model List<WebApplication4.Models.Suggestion>
+﻿@model IEnumerable<WebApplication4.Models.Suggestion>
 @{
-    ViewData["Title"] = "Модерация";
+    ViewData["Title"] = "Модерация предложений";
 }
 
 <div class="container py-5">
-    <h2 class="mb-4 text-center">Панель администратора</h2>
+    <h2 class="mb-4">@ViewData["Title"]</h2>
 
-    @foreach (var item in Model)
+    @if (!Model.Any())
     {
-        <div class="card mb-3 shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">@item.Title</h5>
-                <p class="card-text"><strong>@item.Price ₽</strong> | @item.Address</p>
-                <span class="badge bg-warning">@item.Status</span>
+        <p>Нет предложений, ожидающих модерации.</p>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <div class="card mb-3 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">@item.ObjectType.GetDisplayName(), @item.Area м²</h5>
+                    <p class="card-text">
+                        <strong>@(item.Price?.ToString("C") ?? "цена не указана")</strong> | @item.Address<br />
+                        Комнат: @item.Rooms.GetDisplayName()<br />
+                        Состояние: @item.Condition.GetDisplayName()<br />
+                        Обременения: @item.Encumbrance.GetDisplayName()<br />
+                        Телефон: @item.PhoneNumber<br />
+                        Описание: @item.Description
+                    </p>
+                    <span class="badge bg-warning">@item.Status</span>
 
-                @if (item.Status == WebApplication4.Models.SuggestionStatus.Pending)
-                {
-                    <form asp-action="Approve" method="post" style="display:inline;">
-                        <button type="submit" name="id" value="@item.Id" class="btn btn-sm btn-success">Одобрить</button>
-                    </form>
-                    <form asp-action="Reject" method="post" style="display:inline;">
-                        <button type="submit" name="id" value="@item.Id" class="btn btn-sm btn-danger">Отклонить</button>
-                    </form>
-                }
+                    @if (item.Status == SuggestionStatus.Pending)
+                    {
+                        <form asp-action="Approve" method="post" style="display:inline;">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-sm btn-success">Одобрить</button>
+                        </form>
+                        <form asp-action="Reject" method="post" style="display:inline;">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-sm btn-danger">Отклонить</button>
+                        </form>
+                    }
+                </div>
             </div>
-        </div>
+        }
     }
 </div>

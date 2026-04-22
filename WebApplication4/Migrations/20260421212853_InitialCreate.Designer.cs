@@ -11,8 +11,8 @@ using WebApplication4.Data;
 namespace WebApplication4.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260417145544_AddSuggestionTable")]
-    partial class AddSuggestionTable
+    [Migration("20260421212853_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -224,24 +224,21 @@ namespace WebApplication4.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Area")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Area")
+                        .HasColumnType("REAL");
 
-                    b.Property<string>("Condition")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Condition")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(2000)
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Encumbrance")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasMaxLength(500)
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsPublished")
@@ -250,11 +247,14 @@ namespace WebApplication4.Migrations
                     b.Property<string>("ModeratorUserId")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Price")
+                    b.Property<int>("ObjectType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PropertyType")
-                        .IsRequired()
+                    b.Property<decimal?>("Price")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("PublishedAt")
@@ -262,11 +262,6 @@ namespace WebApplication4.Migrations
 
                     b.Property<int>("Rooms")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -290,30 +285,32 @@ namespace WebApplication4.Migrations
                     b.Property<string>("ApprovedBy")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Area")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Area")
+                        .HasColumnType("REAL");
 
-                    b.Property<string>("Condition")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Condition")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(2000)
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Encumbrance")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ImageUrl")
-                        .HasMaxLength(500)
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("ObjectType")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("PropertyType")
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal?>("Price")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("RejectedAt")
@@ -328,13 +325,7 @@ namespace WebApplication4.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
