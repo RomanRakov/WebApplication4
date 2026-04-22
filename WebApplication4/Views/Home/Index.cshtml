@@ -213,90 +213,156 @@
 
     </div>
 </section>
-
-<!-- Опрос -->
-<section id ="test" class="py-5 mt-5 bg-transparent">
+<section id="test" class="py-5 mt-5 bg-transparent">
     <div class="container">
-        
         <div class="quiz-wrapper">
-            
             <div class="quiz-sidebar d-flex flex-column justify-content-between">
-                
                 <div class="sidebar-promo p-4 mb-4">
-                    <h5 class="fw-bold mb-2 lh-sm">
-                        Предложим больше денег,<br> чем другие!
-                    </h5>
-                    <p class="small mb-2 lh-base text-muted">
-                        Ответьте на 6 вопросов
-                    </p>
+                    <h5 class="fw-bold mb-2 lh-sm">Предложим больше денег,<br> чем другие!</h5>
+                    <p class="small mb-2 lh-base text-muted">Ответьте на 7 вопросов</p>
                     <p class="mb-0 small fw-semibold text-dark">
                         - мы дадим лучшее предложение по цене и 2 миллиона рублей аванса уже сегодня
                     </p>
                 </div>
-
                 <div class="sidebar-contact fs-6 text-dark text-center mt-auto pt-3 pb-2">
                     Если у вас есть вопросы,<br>
-                    <a href="#" class="link-underline-light link-underline-opacity-0 link-primary text-decoration-none">позвоните нам</a>
+                    <a href="#" class="link-primary text-decoration-none">позвоните нам</a>
                 </div>
             </div>
 
             <div class="quiz-form-content ms-lg-4 position-relative">
                 <div class="progress-bar-top mb-4">
-                    <div class="progress-bar-current" style="width: 14%;"></div> 
+                    <div id="q-progress" class="progress-bar-current" style="width: 14%;"></div>
                 </div>
 
-                <h2 class="question-title mb-5">Что хотите продать?</h2>
+                <form id="quizForm" action="/Announcements/Create" method="post">
+                    @Html.AntiForgeryToken()
 
-                <div class="options-grid row g-3 mb-5">
-                    <div class="col-6 col-md-6">
-                        <label class="option-card w-100 h-100 d-flex align-items-center p-3 border rounded-pill cursor-pointer">
-                            <input type="radio" name="prop_type" class="btn-check visually-hidden" checked>
-                            <span class="form-check-label fw-medium">Квартира</span>
-                        </label>
+                    <div class="quiz-step active" data-step="1">
+                        <h2 class="question-title mb-5">Что хотите продать?</h2>
+                        <div class="options-grid d-flex flex-wrap gap-3 mb-5">
+                            <label class="option-card"><input type="radio" name="ObjectType" value="0" class="btn-check" checked tabindex="-1"><span>Квартира</span></label>
+                            <label class="option-card"><input type="radio" name="ObjectType" value="1" class="btn-check" tabindex="-1"><span>Апартаменты</span></label>
+                            <label class="option-card"><input type="radio" name="ObjectType" value="2" class="btn-check" tabindex="-1"><span>Комната</span></label>
+                            <label class="option-card"><input type="radio" name="ObjectType" value="3" class="btn-check" tabindex="-1"><span>Доля в квартире</span></label>
+                            <label class="option-card"><input type="radio" name="ObjectType" value="4" class="btn-check" tabindex="-1"><span>Другое</span></label>
+                        </div>
                     </div>
 
-                    <div class="col-6 col-md-6">
-                        <label class="option-card w-100 h-100 d-flex align-items-center p-3 border rounded-pill cursor-pointer">
-                            <input type="radio" name="prop_type" class="btn-check visually-hidden">
-                            <span class="form-check-label fw-medium">Апартаменты</span>
-                        </label>
+                    <div class="quiz-step d-none" data-step="2">
+                        <h2 class="question-title mb-5">Количество комнат</h2>
+                        <div class="options-grid d-flex flex-wrap gap-3 mb-5">
+                            <label class="option-card"><input type="radio" name="Rooms" value="0" class="btn-check" tabindex="-1"><span>Студия</span></label>
+                            <label class="option-card"><input type="radio" name="Rooms" value="1" class="btn-check" tabindex="-1"><span>1</span></label>
+                            <label class="option-card"><input type="radio" name="Rooms" value="2" class="btn-check" tabindex="-1"><span>2</span></label>
+                            <label class="option-card"><input type="radio" name="Rooms" value="3" class="btn-check" tabindex="-1"><span>3</span></label>
+                            <label class="option-card"><input type="radio" name="Rooms" value="4" class="btn-check" tabindex="-1"><span>4+</span></label>
+                        </div>
                     </div>
 
-                    <div class="col-6 col-md-6">
-                        <label class="option-card w-100 h-100 d-flex align-items-center p-3 border rounded-pill cursor-pointer">
-                            <input type="radio" name="prop_type" class="btn-check visually-hidden">
-                            <span class="form-check-label fw-medium">Комната</span>
-                        </label>
+                    <div class="quiz-step d-none" data-step="3">
+                        <h2 class="question-title mb-5">Укажите площадь (м²)</h2>
+                        <div class="mb-5">
+                            <input type="number" name="Area" class="form-control form-control-lg rounded-pill" placeholder="Например: 45" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                        </div>
                     </div>
 
-                    <div class="col-6 col-md-6">
-                        <label class="option-card w-100 h-100 d-flex align-items-center p-3 border rounded-pill cursor-pointer">
-                            <input type="radio" name="prop_type" class="btn-check visually-hidden">
-                            <span class="form-check-label fw-medium">Доля в квартире</span>
-                        </label>
+                    <div class="quiz-step d-none" data-step="4">
+                        <h2 class="question-title mb-5">Есть ли обременения?</h2>
+                        <div class="options-grid d-flex flex-wrap gap-3 mb-5">
+                            <label class="option-card"><input type="radio" name="Encumbrance" value="0" class="btn-check" tabindex="-1"><span>Нет</span></label>
+                            <label class="option-card"><input type="radio" name="Encumbrance" value="1" class="btn-check" tabindex="-1"><span>Ипотека</span></label>
+                            <label class="option-card"><input type="radio" name="Encumbrance" value="2" class="btn-check" tabindex="-1"><span>Коммунальные долги</span></label>
+                            <label class="option-card"><input type="radio" name="Encumbrance" value="3" class="btn-check" tabindex="-1"><span>Другое</span></label>
+                        </div>
                     </div>
 
-                    <div class="col-12 col-md-6">
-                        <label class="option-card w-100 h-100 d-flex align-items-center p-3 border rounded-pill cursor-pointer">
-                            <input type="radio" name="prop_type" class="btn-check visually-hidden">
-                            <span class="form-check-label fw-medium">Другое</span>
-                        </label>
+                    <div class="quiz-step d-none" data-step="5">
+                        <h2 class="question-title mb-5">Состояние квартиры</h2>
+                        <div class="options-grid d-flex flex-wrap gap-3 mb-5">
+                            <label class="option-card"><input type="radio" name="Condition" value="0" class="btn-check" tabindex="-1"><span>Стандартный ремонт</span></label>
+                            <label class="option-card"><input type="radio" name="Condition" value="1" class="btn-check" tabindex="-1"><span>Требуется ремонт</span></label>
+                            <label class="option-card"><input type="radio" name="Condition" value="2" class="btn-check" tabindex="-1"><span>Евроремонт</span></label>
+                            <label class="option-card"><input type="radio" name="Condition" value="3" class="btn-check" tabindex="-1"><span>Дизайнерский ремонт</span></label>
+                        </div>
                     </div>
-                </div>
 
-                <div class="footer-nav d-flex justify-content-between align-items-center">
-                    <span class="step-indicator text-secondary"><small>Шаг: 1/7</small></span>
-                    
-                    <div class="nav-buttons d-flex gap-2">
-                        <button class="btn btn-light border px-4 py-2 rounded-circle" disabled>←</button>
-                        <button class="btn btn-primary px-4 py-2 rounded-pill fw-bold">Далее →</button>
+                    <div class="quiz-step d-none" data-step="6">
+                        <h2 class="question-title mb-5">Где находится объект?</h2>
+                        <div class="mb-5">
+                            <input type="text" name="Address" class="form-control form-control-lg rounded-pill" placeholder="Город, улица, дом" required>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="quiz-step d-none" data-step="7">
+                        <h2 class="question-title mb-5">Последний шаг! Ваш телефон</h2>
+                        <div class="mb-5">
+                            <input type="tel" name="PhoneNumber" class="form-control form-control-lg rounded-pill" placeholder="+7 (___) ___-__-__" required>
+                        </div>
+                    </div>
+
+                    <div class="footer-nav d-flex justify-content-between align-items-center">
+                        <span class="step-indicator text-secondary"><small id="q-step-text">Шаг: 1/7</small></span>
+                        <div class="nav-buttons d-flex gap-2">
+                            <button type="button" id="q-prev" class="btn btn-light border px-4 py-2 rounded-circle" disabled>←</button>
+                            <button type="button" id="q-next" class="btn btn-primary px-4 py-2 rounded-pill fw-bold">Далее →</button>
+                            <button type="submit" id="q-submit" class="btn btn-success px-4 py-2 rounded-pill fw-bold d-none">Отправить</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-
     </div>
 </section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let currentStep = 1;
+        const totalSteps = 7;
+        const steps = document.querySelectorAll(".quiz-step");
+        const progress = document.getElementById("q-progress");
+        const stepText = document.getElementById("q-step-text");
+        const btnNext = document.getElementById("q-next");
+        const btnPrev = document.getElementById("q-prev");
+        const btnSubmit = document.getElementById("q-submit");
+
+        function updateStep() {
+            steps.forEach(s => s.classList.add("d-none"));
+            document.querySelector(`[data-step="${currentStep}"]`).classList.remove("d-none");
+
+            progress.style.width = (currentStep / totalSteps * 100) + "%";
+            stepText.innerText = `Шаг: ${currentStep}/${totalSteps}`;
+
+            btnPrev.disabled = currentStep === 1;
+            
+            if (currentStep === totalSteps) {
+                btnNext.classList.add("d-none");
+                btnSubmit.classList.remove("d-none");
+            } else {
+                btnNext.classList.remove("d-none");
+                btnSubmit.classList.add("d-none");
+            }
+        }
+
+        btnNext.addEventListener("click", () => {
+            const currentInputs = document.querySelector(`[data-step="${currentStep}"]`).querySelectorAll('input[required]');
+            let valid = true;
+            currentInputs.forEach(input => { if(!input.checkValidity()) { input.reportValidity(); valid = false; } });
+
+            if (valid && currentStep < totalSteps) {
+                currentStep++;
+                updateStep();
+            }
+        });
+
+        btnPrev.addEventListener("click", () => {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStep();
+            }
+        });
+    });
+</script>
 
 <section id="reviews" class="py-5 bg-light">
     <div class="container">
