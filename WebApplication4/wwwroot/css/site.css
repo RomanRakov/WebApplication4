@@ -571,3 +571,81 @@ body {
         max-width: 100%;
     }
 }
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Отступы для карусели, чтобы поместились стрелки и точки */
+#reviewsCarousel {
+    padding: 0 20px;
+}
+
+/* Настройка цвета и формы индикаторов */
+.carousel-indicators [data-bs-target] {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+/* Увеличиваем отступ секции, так как точки вынесены вниз */
+#reviews {
+    padding-bottom: 80px !important;
+}
+
+/* Адаптивность: на мобильных скрываем стрелки по бокам, если они выходят за экран */
+@media (max-width: 768px) {
+    .carousel-control-prev, .carousel-control-next {
+        display: none;
+    }
+}
+
+
+/* 1. Скрываем стандартные кружочки радиокнопок */
+.option-card input[type="radio"],
+.btn-check {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    display: none !important; /* Полностью убирает кружки */
+}
+
+/* 2. Обновленный стиль карточки (без кружочков) */
+.option-card {
+    border: 1px solid #e0e0e0 !important;
+    background-color: #ffffff !important;
+    color: #444444 !important;
+    padding: 10px 24px !important; /* Чуть увеличили отступы для красоты */
+    border-radius: 50px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+}
+
+    /* 3. Эффект при наведении */
+    .option-card:hover {
+        background-color: #fcfcfc !important;
+        border-color: #2196F3 !important;
+        color: #2196F3 !important;
+    }
+
+    /* 4. Активное состояние (синяя заливка, белый текст) */
+    .option-card:has(input:checked) {
+        background-color: #2196F3 !important;
+        border-color: #2196F3 !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 10px rgba(33, 150, 243, 0.3) !important; /* Легкая тень для объема */
+    }
+
+    /* 5. Убираем любые рамки фокуса */
+    .option-card:focus, .option-card:active {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
