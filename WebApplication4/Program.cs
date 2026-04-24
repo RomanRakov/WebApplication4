@@ -14,6 +14,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 .AddRoles<IdentityRole>()
 .AddEntityFrameworkStores<AppDbContext>();
 
+
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Identity/Account/Login";
@@ -44,6 +46,16 @@ app.UseRouting();
 app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "adsBoard",
+    pattern: "ads", 
+    defaults: new { controller = "Announcements", action = "Index" });
+
+app.MapControllerRoute(
+    name: "adminReview",
+    pattern: "review", 
+    defaults: new { controller = "Announcements", action = "Moderation" });
 
 app.MapControllerRoute(
     name: "default",

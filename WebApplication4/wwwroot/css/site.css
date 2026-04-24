@@ -576,24 +576,20 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Отступы для карусели, чтобы поместились стрелки и точки */
 #reviewsCarousel {
     padding: 0 20px;
 }
 
-/* Настройка цвета и формы индикаторов */
 .carousel-indicators [data-bs-target] {
     width: 10px;
     height: 10px;
     border-radius: 50%;
 }
 
-/* Увеличиваем отступ секции, так как точки вынесены вниз */
 #reviews {
     padding-bottom: 80px !important;
 }
 
-/* Адаптивность: на мобильных скрываем стрелки по бокам, если они выходят за экран */
 @media (max-width: 768px) {
     .carousel-control-prev, .carousel-control-next {
         display: none;
@@ -601,22 +597,20 @@ html {
 }
 
 
-/* 1. Скрываем стандартные кружочки радиокнопок */
 .option-card input[type="radio"],
 .btn-check {
     position: absolute;
     opacity: 0;
     width: 0;
     height: 0;
-    display: none !important; /* Полностью убирает кружки */
+    display: none !important; 
 }
 
-/* 2. Обновленный стиль карточки (без кружочков) */
 .option-card {
     border: 1px solid #e0e0e0 !important;
     background-color: #ffffff !important;
     color: #444444 !important;
-    padding: 10px 24px !important; /* Чуть увеличили отступы для красоты */
+    padding: 10px 24px !important; 
     border-radius: 50px !important;
     cursor: pointer !important;
     transition: all 0.2s ease-in-out;

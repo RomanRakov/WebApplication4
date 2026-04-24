@@ -368,10 +368,8 @@
     <div class="container">
         <h2 class="text-center mb-5 fw-bold">Отзывы наших клиентов</h2>
 
-        <!-- Обёртка карусели с классом carousel -->
         <div id="reviewsCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-                <!-- Первый слайд (активный) -->
                 <div class="carousel-item active">
                     <div class="row justify-content-center">
                         <div class="col-md-8 col-lg-6">
@@ -388,7 +386,6 @@
                     </div>
                 </div>
 
-                <!-- Второй слайд -->
                 <div class="carousel-item">
                     <div class="row justify-content-center">
                         <div class="col-md-8 col-lg-6">
@@ -405,7 +402,6 @@
                     </div>
                 </div>
 
-                <!-- Третий слайд -->
                 <div class="carousel-item">
                     <div class="row justify-content-center">
                         <div class="col-md-8 col-lg-6">
@@ -423,7 +419,6 @@
                 </div>
             </div>
 
-            <!-- Кнопки управления -->
             <button class="carousel-control-prev" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(1);"></span>
                 <span class="visually-hidden">Предыдущий</span>
@@ -520,7 +515,6 @@
                         const phoneValue = document.getElementById('userPhone').value;
                         const msgDiv = document.getElementById('responseMessage');
 
-                        // Отправка данных на сервер (в HomeController)
                         fetch('/Home/ProcessLead', {
                         method: 'POST',
                         headers: {
@@ -534,11 +528,11 @@
                         .then(response => response.json())
                         .then(data => {
                         if (data.success) {
-                        form.style.display = 'none'; // Прячем форму
+                        form.style.display = 'none'; 
                         msgDiv.textContent = data.message;
-                        msgDiv.style.display = 'block'; // Показываем спасибо
+                        msgDiv.style.display = 'block'; 
                         } else {
-                        alert(data.message); // Показываем ошибку валидации
+                        alert(data.message);
                         }
                         })
                         .catch(error => {

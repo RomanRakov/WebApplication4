@@ -18,7 +18,6 @@ namespace WebApplication4.Controllers
         [HttpPost]
         public async Task<IActionResult> ProcessLead(string name, string phone)
         {
-            // Проверка регулярным выражением (на стороне сервера для надежности)
             var phoneRegex = new System.Text.RegularExpressions.Regex(@"^(\+7|8|7)[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$");
 
             if (string.IsNullOrEmpty(name) || !phoneRegex.IsMatch(phone ?? ""))

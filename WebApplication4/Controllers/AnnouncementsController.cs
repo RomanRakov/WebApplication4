@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using WebApplication4.Models;
-using System.Security.Claims;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using WebApplication4.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Security.Claims;
+using WebApplication4.Data;
+using WebApplication4.Models;
 
 namespace WebApplication4.Controllers
 {
@@ -16,15 +17,19 @@ namespace WebApplication4.Controllers
         private readonly AppDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<AnnouncementsController> _logger;
+        private readonly IMemoryCache _cache;
+
 
         public AnnouncementsController(
             AppDbContext context,
             UserManager<IdentityUser> userManager,
-            ILogger<AnnouncementsController> logger)
+            ILogger<AnnouncementsController> logger,
+            IMemoryCache cache)
         {
             _context = context;
             _userManager = userManager;
             _logger = logger;
+            _cache = cache;
         }
 
         [HttpGet]
@@ -34,10 +39,20 @@ namespace WebApplication4.Controllers
             bool isAdmin = await IsCurrentUserAdminAsync(userId);
             ViewData["IsAdmin"] = isAdmin;
 
-            var flats = await _context.Flats
-                .Where(f => f.IsPublished)
-                .OrderByDescending(f => f.PublishedAt)
-                .ToListAsync();
+            string cacheKey = "PublishedFlatsList";
+
+            if (!_cache.TryGetValue(cacheKey, out List<Flat> flats))
+            {
+                flats = await _context.Flats
+                    .Where(f => f.IsPublished)
+                    .OrderByDescending(f => f.PublishedAt)
+                    .ToListAsync();
+
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(5));
+
+                _cache.Set(cacheKey, flats, cacheOptions);
+            }
 
             return View(flats);
         }
@@ -110,6 +125,7 @@ namespace WebApplication4.Controllers
             suggestion.ApprovedAt = DateTime.UtcNow;
             suggestion.ApprovedBy = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             await _context.SaveChangesAsync();
+            _cache.Remove("PublishedFlats");
 
             TempData["Success"] = "✅ Объявление опубликовано!";
             return RedirectToAction(nameof(Moderation));
